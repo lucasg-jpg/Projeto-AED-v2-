@@ -50,7 +50,7 @@ void imprimefila(tp_fila f){
     jogador e;
     while(!filavazia(&f)){
         removefila(&f, &e);
-        printf("%d\n", e);
+        printf("%s\n", e);
     }
 }
 
