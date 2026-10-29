@@ -65,6 +65,7 @@ int insere_listase_ordenado(tp_listase **lista, tp_item e){
     tp_listase *novo_no, *ant, *atu;
     novo_no=aloca_listase();
     novo_no->info=e;
+    if(novo_no==NULL) return 0;
     atu=*lista;
     ant=NULL;
     while((atu!=NULL)&&(atu->info < novo_no->info)){
@@ -100,13 +101,12 @@ int remove_listase(tp_listase **lista, tp_item e){
     }
     if(atu==NULL) {return 0;}
     if(ant==NULL){
-        *lista=atu->prox;
+        *lista=atu->prox; 
     }
     else{
         ant->prox=atu->prox;
     }
     free(atu);
-    atu=NULL;
     return 1;
 }
 
@@ -158,6 +158,14 @@ int listase_igual(tp_listase *lista1, tp_listase *lista2){
 
 void concatena_listas(tp_listase *L1, tp_listase **L2){
     tp_listase *atu1, *atu2;
+    if(L1==NULL) return;
+    if(*L2==NULL){
+        atu1=L1;
+        while(atu1->prox!=NULL) atu1=atu1->prox;
+        atu1->prox=L1;            
+        *L2=L1;
+        return;
+    }
     atu1=L1;
     atu2=*L2;
     while(atu1->prox!=NULL){
