@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include "structs.h"
 #include "listade.h"
+#include "fila.h"
 
 /*Loga os dados dos jogadores que vao participar da jogada*/
 void entradaDados(jogador *jogador){
@@ -44,10 +45,10 @@ void sync(tp_fila *jog, mesa *mes){
 
 /*Reorganiza as filas quando ainda nao e hora de embaralhar*/
 void reorg(tp_fila *jog1, tp_fila *jog2){
-    while(filavazia(&jog2)!=1){
+    while(!filavazia(jog2)){
         jogador temp;
-        removefila(&jog2, &temp);
-        inserefila(&jog1, temp);
+        removefila(jog2, &temp);
+        inserefila(jog1, temp);
     }
 }
 
