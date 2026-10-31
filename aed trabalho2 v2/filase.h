@@ -25,6 +25,7 @@ tp_fila *destroiFila(tp_fila *fila);
 //funcoes basicas da biblioteca
 tp_fila *inicializaFila(){
 	tp_fila *fila = (tp_fila*) malloc(sizeof(tp_fila));
+	if (fila == NULL) return NULL;
 	fila->ini = fila->fim = NULL;
 	return fila;
 }
