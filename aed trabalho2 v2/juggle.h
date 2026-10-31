@@ -6,6 +6,8 @@
 #include "fila.h"
 #include "structs.h"
 #include "listase.h"
+#include <string.h>
+
 
 /*Como o nome sugere, distribui as cartas entre os jogadores na mesa*/
 void distribuirCartas(tp_pilha *baralho, mesa *mes){
@@ -23,10 +25,14 @@ void distribuirCartas(tp_pilha *baralho, mesa *mes){
 int jogar_carta(tp_listase_carta **mao, tp_listase_carta **mesa, char naipe, char card){
     tp_listase_carta *atu=*mao, *ant=NULL;
     while(atu!=NULL&&((atu->info.naipe!=naipe)&&(atu->info.carta!=card))){
+        ant=atu;
         atu=atu->prox;
     }
-    if(atu==NULL){
-        return 0;
+    if(atu==NULL) return 0;
+    if(!insere_listase_carta_no_fim(cartas_mesa, atu->info)) return 0;  
+    else ant->prox=atu->prox;
+    free(atu);
+    return 1;
     }
     insere_listase_no_fim(mesa, atu->info);
     if(ant==NULL){
